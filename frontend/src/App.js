@@ -2,22 +2,19 @@ import React from 'react'
 import { BrowserRouter as Router, Link, Redirect, Route, Switch} from 'react-router-dom'
 import {Helmet} from 'react-helmet'
 
-import Home from "../components/General-Home/Final-General-Home/final-general-home"
-import User from "../components/User-Home/call-user"
-import Admin from "../components/Admin-Home/final-admin-accordion/final-admin-accordion"
-import NotFound from "./page-NotFound"
-import login from "../components/Buttons/loginForm"
-import sign_up from "../components/Form/sign-up-forms"
-import Header from "../components/General-Home/NavBar/header/header-link"
-import Nurse from "../components/Nurse-Home/final-admin-accordion/final-admin-accordion"
-import AdminAccountCreate from "../components/Form/AdminAccount"
-import AdminLoginFroms from "../components/Buttons/admin-loginForms"
+import Home from "./components/General-Home/Final-General-Home/final-general-home"
+import User from "./components/User-Home/call-user"
+import Admin from "./components/Admin-Home/final-admin-accordion/final-admin-accordion"
+import NotFound from "./Javascripts/page-NotFound"
+import login from "./components/Buttons/loginForm"
+import sign_up from "./components/Form/sign-up-forms"
+import Header from "./components/General-Home/NavBar/header/header-link"
+import Nurse from "./components/Nurse-Home/final-admin-accordion/final-admin-accordion"
+import AdminAccountCreate from "./components/Form/AdminAccount"
+import AdminLoginFroms from "./components/Buttons/admin-loginForms"
 
 
-//import Home from "../components/General-Home/Final-General-Home/final-general-home"
-//import Router from "./Router"
-
-import "../Stylesheets/App.css"
+import "./App.css"
 
 const TITLE = "Medpharma Consultation"
 
