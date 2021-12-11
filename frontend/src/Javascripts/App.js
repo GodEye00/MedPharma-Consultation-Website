@@ -23,6 +23,10 @@ const TITLE = "Medpharma Consultation"
 
 class App extends React.Component {
 
+  componentDidMount() {
+    document.title = "Medpharma Consultation"
+  }
+
   
   render() {
 
