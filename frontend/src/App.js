@@ -44,7 +44,7 @@ class App extends React.Component {
          <Route path="/home" exact component={Home} /> 
          <Route path="/home/user" exact component={User} /> 
          <Route path="/home/admin" exact component={Admin} /> 
-         <Route path="/home/admin-login/nurse" excat component ={Nurse} />
+         <Route path="/home/admin-login/nurse" exact component ={Nurse} />
          <Route path="/home/login" exact component={login} /> 
          <Route path="/home/sign-up" exact component={sign_up} />
          <Route path="/home/admin-login" exact component={AdminLoginFroms} />  
