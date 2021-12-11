@@ -10,15 +10,34 @@ import "../Api-create-update-delete/user-update-button.css"
 
 function userDetails() {
 
-    var accounts = JSON.parse(sessionStorage.getItem("account"))
+    var accounts = {}
 
     window.addEventListener('load', () => {
+
+      accounts = JSON.parse(sessionStorage.getItem("account"))
+
+
+        var new_accounts = {}
 
         var text = $("#text")
         var text_appear = $("#type-symp")
         var symp = $("#symptoms")
         var submit = $("#sub-mit")
         var update = $("#update")
+
+    
+    submit.on('click', () => {
+        symp.css('display', 'block')
+        if (!new_accounts) {
+            symp.text(accounts.symptoms)
+        } else {
+          symp.text(new_accounts.symptoms)
+        }
+        submit.css('display', 'none')
+        text.css('display', 'none')
+        text_appear.css('display', 'none')
+        update.css('display', 'block')
+    })
  
 
     update.on('click', () => {
@@ -39,7 +58,7 @@ function userDetails() {
      
     $.ajax ( {
         type: "PUT",
-        url: "http://localhost:4000/accounts/:" + accounts.id,
+        url: "https://aqueous-atoll-96492.herokuapp.com/accounts/:" + accounts.id,
      //   headers: {"Authorization" : "Bearer " + token},
         dataType: " json ",
         data: {
@@ -57,28 +76,14 @@ function userDetails() {
         timeout: 200,
         xhrFields: {
             withCredentials: true
-        },
-        beforeSend: function(xhr) { 
-            
-        },
-    
-        complete: function() {
-      
-        },
-        
+        },        
     
         success : function(data) {
     
-            swal('success', 'Submitted', 'Updated symptoms sent!')
-
-            symp.text(data.symptoms)
-            submit.css('display', 'none')
-            text.css('display', 'none')
-            text_appear.css('display', 'none')
-            update.css('display', 'block')
+            swal('success', 'Submitted', 'Updated symptoms sent!')     
             
-    
-    
+            new_accounts  = data
+     
             },
     
         

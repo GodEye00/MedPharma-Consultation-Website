@@ -6,12 +6,14 @@ import "./sign-up-fieldset.css"
 
 function updateSignUpForms() {
 
-    var account = JSON.parse(sessionStorage.getItem("account"))
-
-    var token = account.jwtToken     
+    var account = {} 
 
 
     window.addEventListener('load', () => {  
+
+        account = JSON.parse(sessionStorage.getItem("account"))
+
+        var token = account.jwtToken   
 
         $('#admin-update-sign-up-forms').on( 'submit', function(e) {
         
@@ -21,8 +23,8 @@ function updateSignUpForms() {
             var form = $("#admin-update-sign-up-forms")
         
 
-             var url = "http://localhost:4000/accounts/" + account.id 
-             var ad_url = "http://localhost:5000/admin_accounts/" + account.id 
+             var url = "https://aqueous-atoll-96492.herokuapp.com/accounts/" + account.id 
+             var ad_url = "https://tranquil-temple-70575.herokuapp.com/admin_accounts/" + account.id 
 
              account.Role = 'Nurse' ?
         
@@ -65,9 +67,9 @@ function updateSignUpForms() {
                     
                 },
             
-                error: function(data) {
+                error: function() {
             
-                    swal('error', 'Error', 'Sorry, something went wrong. Please sign up again' + JSON.stringify(data))
+                    swal('error', 'Error', 'Sorry, something went wrong. Please sign up again')
                 }
             
             
@@ -115,9 +117,9 @@ function updateSignUpForms() {
                         
                     },
                 
-                    error: function(data) {
+                    error: function() {
                 
-                        swal('error', 'Error', 'Sorry, something went wrong. Please sign up again' + JSON.stringify(data))
+                        swal('error', 'Error', 'Sorry, something went wrong. Please sign up again')
                     }
                 
                 

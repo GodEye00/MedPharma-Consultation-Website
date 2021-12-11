@@ -1,6 +1,6 @@
 div#user-details {
     width: 80%;
-    height: fit-content;
+    height: max-content;
     margin: 0% 5% 1% 10%;
     float: left;
     box-shadow:  5px 5px 5px 5px #777777;
@@ -123,6 +123,7 @@ div.updateSymptom {
      
     
         }
+
 
 p.new-box {
     color: blue;

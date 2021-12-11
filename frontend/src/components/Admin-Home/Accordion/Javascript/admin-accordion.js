@@ -15,7 +15,6 @@ import  AdminUpdateDelete from "../../../Api-create-update-delete/admin-update-d
 import Footer from "../../../General-Home/Footer/final-footer"
 
 import swal from "../../../../Javascripts/Swal"
-import { render } from "@testing-library/react"
 
 
 
@@ -28,21 +27,23 @@ class AdminAccordion extends React.Component {
 
   render() {
 
-    var my_account = JSON.parse(sessionStorage.getItem("account"))
+    var my_account = {}
+        
+        window.addEventListener('load', () => { 
+
+             my_account = JSON.parse(sessionStorage.getItem("account"))
 
             var user_account = []
 
             var token = my_account.jwtToken     
             
-        
-        
-        window.addEventListener('load', () => {       
+              
                
         
                     
                             $.ajax ( {
                                 type: "GET",
-                                url: "http://localhost:4000/accounts/",
+                                url: "https://aqueous-atoll-96492.herokuapp.com/accounts/",
 
                                 headers: {"Authorization" : "Bearer " + token},
                                 
@@ -53,19 +54,10 @@ class AdminAccordion extends React.Component {
                                 xhrFields: {
                                     withCredentials: true
                                 },
-                                beforeSend: function() { 
-        
-                            
-                                },
-                            
-                                complete: function() {
-                              
-                                },
-                                
+             
                             
                                 success : function(data) {
-                        
-
+                                    swal('success', 'Success', "All patient details loaded successfully" )
                                     user_account = data
                                                         
                                     },
@@ -80,7 +72,7 @@ class AdminAccordion extends React.Component {
                                     
                                 },
                             
-                                error: function(data) {
+                                error: function() {
                             
                                     swal('error', 'Error', "Sorry, unable to reach database" )
                                 }
@@ -152,8 +144,7 @@ class AdminAccordion extends React.Component {
     var $ul = $("#list") 
     var $cons_symp = $("#cons-symp")
     var $spec_det = $("#spec-det")
-    var i = 0
-    var us_len = user_account.length
+ 
 
 
    user_account.forEach(details => { 
@@ -214,15 +205,19 @@ class AdminAccordion extends React.Component {
         let text = document.getElementsByTagName("textarea").textContent
 
         del.addEventListener('click', function() {
-                alert("user I just wrote delete called" )
 
                 let id_here = details.id
-                alert("user " + id_here)
              
             $.ajax ( {
                 type: "DELETE",
-                url: "http://localhost:4000/accounts/:" + id_here,
+                url: "https://aqueous-atoll-96492.herokuapp.com/accounts/" + id_here,
                 dataType: " json ",
+                data: {
+                    id : id_here
+                },
+
+                headers: {"id" : id_here},
+
                
                  async: false,
                 timeout: 200,
@@ -240,9 +235,9 @@ class AdminAccordion extends React.Component {
                 },
                 
             
-                success : function(data) {
+                success : function() {
             
-                    swal('success', 'Account Deleted!', data)
+                    swal('success', 'Patient Account Deleted!')
             
             
                     },
@@ -257,9 +252,9 @@ class AdminAccordion extends React.Component {
                     
                 },
             
-                error: function(data) {
+                error: function() {
             
-                    swal('error', 'Error', 'Something went wrong. Retry'+ JSON.stringify(data))
+                    swal('error', 'Error', 'Something went wrong. Retry')
                 }
             
             
@@ -273,11 +268,11 @@ class AdminAccordion extends React.Component {
 
 
         submit.addEventListener('click', function() {
-            alert("user submit called")
-         
+            let id_here = details.id
+
         $.ajax ( {
             type: "PUT",
-            url: "http://localhost:4000/accounts/:" + id,
+            url: "https://aqueous-atoll-96492.herokuapp.com/accounts/" + id_here,
             headers: {"Authorization" : "Bearer " + user_token},
             dataType: " json ",
             data: {
@@ -296,18 +291,11 @@ class AdminAccordion extends React.Component {
             xhrFields: {
                 withCredentials: true
             },
-            beforeSend: function(xhr) { 
-                
-            },
+             
         
-            complete: function() {
-          
-            },
-            
+            success : function() {
         
-            success : function(data) {
-        
-                swal('success', 'Account Deleted!', JSON.stringify(dateCreated))
+                swal('success', 'Account Updated!', 'Patient consultation successfully updated')
         
         
                 },

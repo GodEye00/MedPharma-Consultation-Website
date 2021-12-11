@@ -1,7 +1,6 @@
 import $ from "jquery"
 import "jquery"
 
-import signout from "../../Api-create-update-delete/logout"
 import swal from "../../../Javascripts/Swal"
 
 import "../../Buttons/loginForms.css"
@@ -17,6 +16,8 @@ function logout() {
 
         var token = account.jwtToken  
 
+        let current_window_locationUrl = window.location.href
+
 
     $('#logout').on('click', function(e) {
 
@@ -26,7 +27,7 @@ function logout() {
         
         $.ajax ({
             type: "POST",
-            url: "http://localhost:4000/accounts/revoke-token",
+            url: "https://aqueous-atoll-96492.herokuapp.com/accounts/revoke-token",
             headers: {"Authorization" : "Bearer " + token},
             
             dataType: "json ",
@@ -48,7 +49,7 @@ function logout() {
         
             success : function(data) {
         
-                window.open("http://localhost:3000/home", "_self") 
+                window.open(current_window_locationUrl + "/home", "_self") 
               
                 },
         

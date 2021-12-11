@@ -11,11 +11,14 @@ import "./delete.css"
 
 function _delete() {
 
-    var account = JSON.parse(sessionStorage.getItem("account"))
-
-
 
     window.addEventListener('load', () => {  
+
+        var account = JSON.parse(sessionStorage.getItem("account"))
+
+
+        let current_window_locationUrl = window.location.href
+
  
 
 $('#delete').on( 'click', function(e) {
@@ -25,7 +28,7 @@ $('#delete').on( 'click', function(e) {
 
     $.ajax ( {
     type: "DELETE",
-    url: "http://localhost:4000/accounts/:" + account.id,
+    url: "https://aqueous-atoll-96492.herokuapp.com/accounts/" + account.id,
     data: {
         id : account.id
     },
@@ -52,7 +55,7 @@ $('#delete').on( 'click', function(e) {
 
         swal('success', 'Account Deleted!', data)
 
-        window.open("http://localhost:3000/home", "_self") 
+        window.open(current_window_locationUrl + "/home", "_self") 
 
         },
 
@@ -66,9 +69,9 @@ $('#delete').on( 'click', function(e) {
         
     },
 
-    error: function(data) {
+    error: function() {
 
-        swal('error', 'Error', 'Something went wrong. Retry' + JSON.stringify(data))
+        swal('error', 'Error', 'Something went wrong. Retry')
     }
 
 

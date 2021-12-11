@@ -14,7 +14,6 @@ import CreateAccount from "../../../Buttons/patient-doctor-buttons"
 import   AdminUpdateDelete from "../../../Api-create-update-delete/admin-update-delete"
 import swal from "../../../../Javascripts/Swal"
 import Footer from "../../../General-Home/Footer/final-footer"
-import { render } from "@testing-library/react"
 
 
 
@@ -27,8 +26,12 @@ class AdminAccordion extends React.Component {
 
   render() {
 
+    var my_account = {}
 
-    var my_account = JSON.parse(sessionStorage.getItem("account"))
+        window.addEventListener('load', () => {
+
+            
+     my_account = JSON.parse(sessionStorage.getItem("account"))
 
     var user_account = {}
     var doc_account = {}
@@ -36,13 +39,10 @@ class AdminAccordion extends React.Component {
     var token = my_account.jwtToken  
 
 
-        window.addEventListener('load', () => {
-
-
           
             $.ajax ( {
                 type: "GET",
-                url: "http://localhost:4000/accounts/",
+                url: "https://aqueous-atoll-96492.herokuapp.com/accounts/",
 
                 headers: {"Authorization" : "Bearer " + token},
                 
@@ -53,18 +53,7 @@ class AdminAccordion extends React.Component {
                 xhrFields: {
                     withCredentials: true
                 },
-                beforeSend: function() { 
 
-               
-            
-                },
-            
-                complete: function() {
-               
-              
-                },
-                
-            
                 success : function(data) {             
 
                     user_account = data
@@ -83,7 +72,7 @@ class AdminAccordion extends React.Component {
             
                 error: function(data) {
             
-                    swal('error', 'Error', "Sorry, unable to reach database" )
+                    swal('error', 'Error', "Sorry, something went wrong while getting all patients. Please try again" )
                 }
             
             
@@ -96,7 +85,7 @@ class AdminAccordion extends React.Component {
     
 $.ajax ( {
     type: "GET",
-    url: "http://localhost:5000/admin_accounts/",
+    url: "https://tranquil-temple-70575.herokuapp.com/admin_accounts/",
 
     headers: {"Authorization" : "Bearer " + token},
     
@@ -107,16 +96,6 @@ $.ajax ( {
     xhrFields: {
         withCredentials: true
     },
-    beforeSend: function() { 
-
-  
-
-    },
-
-    complete: function() {
-  
-    },
-    
 
     success : function(data) {
 
@@ -139,7 +118,7 @@ $.ajax ( {
 
     error: function(data) {
 
-        swal('error', 'Error', JSON.stringify(data) )
+        swal('error', 'Error', 'Sorry, something went wrong while getting all doctors, please try again')
     }
 
 
@@ -171,7 +150,6 @@ $.ajax ( {
         let email = details.email
         let doctor = details.doctor
         let role = details.role
-        let user_token = details.jwtToken
 
     if (role === 'User') { 
 
@@ -210,8 +188,11 @@ $.ajax ( {
              
             $.ajax ( {
                 type: "DELETE",
-                url: "http://localhost:4000/accounts/" + id,
-               headers: {"Authorization" : "Bearer " + user_token},
+                url: "https://aqueous-atoll-96492.herokuapp.com/accounts/" + id,
+               headers: {"id" :  id },
+               data: {
+                   id : id
+               },
                 dataType: " json ",
                
                  async: false,
@@ -224,15 +205,12 @@ $.ajax ( {
                     swal('question', 'Irreversible action!', 'Are you sure you want to delete your account?')
             
                 },
-            
-                complete: function() {
-              
-                },
+
                 
             
-                success : function(data) {
+                success : function() {
             
-                    swal('success', 'Account Deleted!', data)
+                    swal('success', 'Account Deleted!', 'Patient Account Successfully Deleted')
             
             
                     },
@@ -295,12 +273,15 @@ $.ajax ( {
 
 
         del.addEventListener('click', function() {
-                alert("nurse user delete called")
              
             $.ajax ( {
                 type: "DELETE",
-                url: "http://localhost:4000/accounts/" + id,
-               headers: {"Authorization" : "Bearer " + user_token},
+                url: "https://aqueous-atoll-96492.herokuapp.com/accounts/" + id,
+               headers: {"id" : id},
+               data: {
+                   id : id
+                },
+
                 dataType: " json ",
                
                  async: false,
@@ -310,7 +291,7 @@ $.ajax ( {
                 },
                 beforeSend: function(xhr) { 
             
-                    swal('question', 'Irreversible action!', 'Are you sure you want to delete your account?')
+                    swal('question', 'Irreversible action!', 'Are you sure you want to delete doctor\'s account?')
             
                 },
             
@@ -321,8 +302,7 @@ $.ajax ( {
             
                 success : function(data) {
             
-                    swal('success', 'Account Deleted!', data)
-            
+                    swal('success', 'Account Deleted!', 'Doctor\'s account successfully deleted')
             
                     },
             
@@ -338,7 +318,7 @@ $.ajax ( {
             
                 error: function() {
             
-                    swal('error', 'Error', 'Something went wrong. Retry')
+                    swal('error', 'Error', 'Something went wrong while deleting doctor\'s account. Retry')
                 }
             
             
@@ -390,7 +370,6 @@ $.ajax ( {
         let lastName = details.lastName
         let email = details.email
         let role = details.role
-        let doc_token = details.jwtToken
 
 if (role === "Doctor") {
 
@@ -419,12 +398,15 @@ if (role === "Doctor") {
 
 
         del.addEventListener('click', function() {
-                alert("nurse user delete called")
              
             $.ajax ( {
                 type: "DELETE",
-                url: "http://localhost:5000/admin_accounts/" + id,
-               headers: {"Authorization" : "Bearer " + doc_token},
+                url: "https://tranquil-temple-70575.herokuapp.com/admin_accounts/" + id,
+               headers: {"id" : id},
+               data: {
+                   id : id
+                },
+
                 dataType: " json ",
                
                  async: false,
@@ -445,7 +427,7 @@ if (role === "Doctor") {
             
                 success : function(data) {
             
-                    swal('success', 'Account Deleted!', data)
+                    swal('success', 'Account Deleted!', "Doctor's accont successfully deleted")
             
             
                     },
@@ -462,7 +444,7 @@ if (role === "Doctor") {
             
                 error: function() {
             
-                    swal('error', 'Error', 'Something went wrong. Retry')
+                    swal('error', 'Error', 'Something went wrong while trying to delete doctor\'s account. Retry')
                 }
             
             

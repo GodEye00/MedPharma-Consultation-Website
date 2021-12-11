@@ -6,20 +6,22 @@ import swal from "../../Javascripts/Swal"
 import "./loginForms.css"
 
 
-function AdminLoginForm() {
+function loginForm() {
     
 
-    window.addEventListener('load', () => {  
+    window.addEventListener('load', () => { 
+        
+        let current_window_locationUrl = window.location.href
 
         var ssoAction = function (data) { 
 
             if(data.role === "Admin") {
 
-                window.open("http://localhost:3000/admin", "_self") 
+                window.open(current_window_locationUrl + "/admin", "_self") 
             }
       
          else  {
-            window.open("http://localhost:3000/user", "_self") 
+            window.open(current_window_locationUrl + "/user", "_self") 
          }
 
     }
@@ -42,7 +44,7 @@ $('#admin-login-Form').on( 'submit', function(e) {
 
     $.ajax ( {
     type: "POST",
-    url: "http://localhost:4000/accounts/authenticate",
+    url: "https://aqueous-atoll-96492.herokuapp.com/accounts/authenticate",
     data: form.serialize(),
     
     dataType: " json ",
@@ -80,9 +82,9 @@ $('#admin-login-Form').on( 'submit', function(e) {
         
     },
 
-    error: function(data) {
+    error: function() {
 
-        swal('error', 'Error', 'Something went wrong. Retry ' + JSON.stringify(data))
+        swal('error', 'Error', 'Something went wrong. Retry ')
     }
 
 
@@ -105,7 +107,7 @@ $('#admin-login-Form').on( 'submit', function(e) {
     return (
         <div className="loginFormContainer">
             <form id ="admin-login-Form" className="login" name="form"
-                action="http://localhost:5000/admin_accounts/authenticate" method="POST" > 
+                action="https://aqueous-atoll-96492.herokuapp.com/accounts/authenticate" method="POST" > 
                 <label for="name">Email</label>
                 <input className="email" type="email" name="email" />
                 <label for="pwd" className="password-label">Password</label>
@@ -119,4 +121,4 @@ $('#admin-login-Form').on( 'submit', function(e) {
     )
 }
 
-export default AdminLoginForm
+export default loginForm

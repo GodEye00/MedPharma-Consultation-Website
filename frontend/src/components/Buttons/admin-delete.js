@@ -11,21 +11,21 @@ import "./admin-update-delete.css"
 
 function _delete(id) {
 
-    var account = JSON.parse(sessionStorage.getItem("account"))
-
-
 
     window.addEventListener('load', () => {  
- 
 
-$('#admin-delete').on( 'click', function(e) {
+    var account = JSON.parse(sessionStorage.getItem("account"))
+
+    let current_window_locationUrl = window.location.href
+
+    $('#admin-delete').on( 'click', function(e) {
 
     e.preventDefault()
 
 
     $.ajax ( {
     type: "DELETE",
-    url: "http://localhost:5000/admin_accounts/:" + account.id,
+    url: "https://tranquil-temple-70575.herokuapp.com/admin_accounts/" + account.id,
     data: {
         id : account.id
     },
@@ -41,28 +41,20 @@ $('#admin-delete').on( 'click', function(e) {
 
         swal('warning', 'Irreversible action!', 'Are you sure you want to delete your account?')
 
-    },
-
-    complete: function() {
-  
-    },
-    
+    },   
 
     success : function(data) {
 
         swal('success', 'Account Deleted!', data)
 
-        window.open("http://localhost:3000/home", "_self") 
+        window.open(current_window_locationUrl + "/home", "_self") 
 
         },
 
     
     fail: function() { 
 
-            swal('error', 'Sorry', 'Something went wrong. Retry')
-
-
-           
+            swal('error', 'Sorry', 'Something went wrong. Retry')     
         
     },
 

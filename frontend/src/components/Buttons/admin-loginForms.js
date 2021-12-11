@@ -7,20 +7,22 @@ import "./loginForms.css"
 import "./admin-loginForms.css"
 
 
-function loginForm() {
+function AdminLoginForm() {
     
 
     window.addEventListener('load', () => {  
+
+        let current_window_locationUrl = window.location.href
 
         var ssoAction = function (data) { 
 
             if(data.role === "Nurse") {
 
-                window.open("http://localhost:3000/nurse", "_self") 
+                window.open(current_window_locationUrl + "/nurse", "_self") 
             }
       
          else if (data.role === "Doctor") {
-            window.open("http://localhost:3000/admin", "_self") 
+            window.open(current_window_locationUrl + "/admin", "_self") 
          }
 
     }
@@ -54,7 +56,7 @@ function makeBaseAuth(user, pswd){
 
     $.ajax ( {
     type: "POST",
-    url: "http://localhost:5000/admin_accounts/authenticate",
+    url: " https://tranquil-temple-70575.herokuapp.com/admin_accounts/authenticate",
     data: form.serialize(),
     
     dataType: " json ",
@@ -119,7 +121,7 @@ function makeBaseAuth(user, pswd){
         <div id="background">
         <div className="loginFormContainer" id="admin-login">
             <form id ="login-Form" className="login" name="form"
-                action="http://localhost:5000/admin_accounts/authenticate" method="POST" > 
+                action=" https://tranquil-temple-70575.herokuapp.com/admin_accounts/authenticate" method="POST" > 
                 <label for="name" className="admin">Email</label>
                 <input className="email admin" type="email" name="email" />
                 <label for="pwd" className="password-label admin">Password</label>
@@ -135,4 +137,4 @@ function makeBaseAuth(user, pswd){
     )
 }
 
-export default loginForm
+export default AdminLoginForm

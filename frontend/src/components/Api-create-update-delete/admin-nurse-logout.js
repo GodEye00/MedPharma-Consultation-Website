@@ -11,11 +11,12 @@ function logout() {
 
     window.addEventListener('load', () => {
 
+        let current_window_locationUrl = window.location.href
 
         
             $.ajax ({
             type: "POST",
-            url: "http://localhost:4000/accounts/revoke-token",
+            url: "https://tranquil-temple-70575.herokuapp.com/admin_accounts/revoke-token",
             headers: {"Authorization" : "Bearer " + token},
             
             dataType: "json ",
@@ -37,7 +38,7 @@ function logout() {
         
             success : function(data) {
         
-                window.open("http://localhost:3000/home", "_self") 
+                window.open(current_window_locationUrl + "/home", "_self") 
               
                 },
         

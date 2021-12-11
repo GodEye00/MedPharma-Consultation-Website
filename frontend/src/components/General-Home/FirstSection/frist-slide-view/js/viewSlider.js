@@ -12,6 +12,9 @@ function viewSlider() {
 
 	window.addEventListener('load', () => {
 
+
+		let current_window_locationUrl = window.location.href
+
 		var sliderContainers = $('.cd-slider-wrapper');
 	
 		if( sliderContainers.length > 0 ) initBlockSlider(sliderContainers);
@@ -95,7 +98,8 @@ return (
 							
 						Reduce the cost of healthcare through our simple to use app
 						</p>
-						<a href="http://localhost:3000/admin-login" class="btn">Administrator Login</a>
+						<a href="/home/admin-login" class="btn"
+						onclick="location.href = location.href + this.href">Administrator Login</a>
 					</div>
 				</div>
 			</li> { /* <!-- .cd-half-block.content --> */ }

@@ -24,7 +24,7 @@ class AdminAccount extends React.Component {
  
     window.addEventListener('load', () => {  
 
-
+        let current_window_locationUrl = window.location.href
 
         $('#nurse-doc-sign-up').on( 'submit', function(e) {
         
@@ -39,7 +39,7 @@ class AdminAccount extends React.Component {
         
                 $.ajax ( {
                     type: "POST",
-                    url: "http://localhost:5000/admin_accounts/register",
+                    url: "https://tranquil-temple-70575.herokuapp.com/admin_accounts/register",
                     data: form.serialize() ,
                     
                     dataType: " json ",
@@ -51,18 +51,13 @@ class AdminAccount extends React.Component {
                     },
                     beforeSend: function(xhr) { 
                 
-                    },
+                    },                    
                 
-                    complete: function() {
-                  
-                    },
-                    
-                
-                    success : function(data) {
+                    success : function() {
             
                         swal('success', 'Success!', "Your Account has been created. Kindly login")  
                         
-                        window.open("http://localhost:3000/home", "_self")                       
+                        window.open(current_window_locationUrl + "/home", "_self")                       
                 
                         },
                 
@@ -73,12 +68,10 @@ class AdminAccount extends React.Component {
                             
                     },
                 
-                    error: function(data) {
+                    error: function() {
                 
-                        swal('error', 'Error', 'Sorry, something went wrong. Please sign up again ' + JSON.stringify(data))
+                        swal('error', 'Error', 'Sorry, something went wrong. Please sign up again ')
                     }
-                
-                
                 
                     })
                     
@@ -102,7 +95,7 @@ class AdminAccount extends React.Component {
         <div className="form-container">
 
    <form id="nurse-doc-sign-up" class="sign-up" 
-        action="http://localhost:4000/admin_accounts/register" method="POST">
+        action="https://tranquil-temple-70575.herokuapp.com/admin_accounts/register" method="POST">
         
     <fieldset>
     <legend>ADMIN CREATE AN ACCOUNT</legend>

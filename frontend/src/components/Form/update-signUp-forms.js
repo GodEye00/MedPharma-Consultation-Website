@@ -22,7 +22,7 @@ function updateSignUpForms() {
         
                 $.ajax ( {
                 type: "PUT",
-                url:  "http://localhost:4000/accounts/" + account.id,
+                url:  "https://aqueous-atoll-96492.herokuapp.com/accounts/" + account.id,
                 data: form.serialize() ,
                 headers: {"Authorization" : "Bearer " + token},
 
@@ -59,9 +59,9 @@ function updateSignUpForms() {
                     
                 },
             
-                error: function(data) {
+                error: function() {
             
-                    swal('error', 'Error', 'Sorry, something went wrong. Please sign up again' + JSON.stringify(data))
+                    swal('error', 'Error', 'Sorry, something went wrong. Please sign up again')
                 }          
         
         })
@@ -81,7 +81,8 @@ function updateSignUpForms() {
 
     <div class="sign-up-form-container">
         <form id="update-sign-up-forms" class="sign-up" 
-     method="put">
+        action="https://aqueous-atoll-96492.herokuapp.com/accounts/"
+     method="PUT">
 
     <fieldset>
     <legend>CREATE AN ACCOUNT</legend>

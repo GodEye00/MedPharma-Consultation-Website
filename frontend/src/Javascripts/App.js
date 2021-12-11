@@ -1,5 +1,6 @@
 import React from 'react'
 import { BrowserRouter as Router, Link, Redirect, Route, Switch} from 'react-router-dom'
+import {Helmet} from 'react-helmet'
 
 import Home from "../components/General-Home/Final-General-Home/final-general-home"
 import User from "../components/User-Home/call-user"
@@ -7,7 +8,6 @@ import Admin from "../components/Admin-Home/final-admin-accordion/final-admin-ac
 import NotFound from "./page-NotFound"
 import login from "../components/Buttons/loginForm"
 import sign_up from "../components/Form/sign-up-forms"
-import update_details from "../components/Form/update-signUp-forms"
 import Header from "../components/General-Home/NavBar/header/header-link"
 import Nurse from "../components/Nurse-Home/final-admin-accordion/final-admin-accordion"
 import AdminAccountCreate from "../components/Form/AdminAccount"
@@ -19,12 +19,19 @@ import AdminLoginFroms from "../components/Buttons/admin-loginForms"
 
 import "../Stylesheets/App.css"
 
+const TITLE = "Medpharma Consultation"
+
 class App extends React.Component {
 
   
   render() {
 
   return (
+
+    <>
+    <Helmet>
+      <title>{TITLE}</title>
+    </Helmet>
 
     <div className="App">
 
@@ -34,14 +41,13 @@ class App extends React.Component {
     
     <Switch>
          <Route path="/home" exact component={Home} /> 
-         <Route path="/user" exact component={User} /> 
-         <Route path="/admin" exact component={Admin} /> 
-         <Route path="/nurse" excat component ={Nurse} />
-         <Route path="/login" exact component={login} /> 
-         <Route path="/sign-up" exact component={sign_up} />
-         <Route path="/admin-login" exact component={AdminLoginFroms} />  
-         <Route path="/admin-sign-up" exact component= {AdminAccountCreate} /> 
-         <Route path="/update-details" exact component={update_details} />
+         <Route path="/home/user" exact component={User} /> 
+         <Route path="/home/admin" exact component={Admin} /> 
+         <Route path="/home/admin-login/nurse" excat component ={Nurse} />
+         <Route path="/home/login" exact component={login} /> 
+         <Route path="/home/sign-up" exact component={sign_up} />
+         <Route path="/home/admin-login" exact component={AdminLoginFroms} />  
+         <Route path="/home/admin-sign-up" exact component= {AdminAccountCreate} /> 
          <Route exact path="/">
            <Redirect to="/home" />
          </Route>
@@ -52,6 +58,8 @@ class App extends React.Component {
     </Router>
 
         </div>
+
+        </>
   ) 
 
 

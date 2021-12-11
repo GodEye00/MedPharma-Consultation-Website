@@ -10,6 +10,8 @@ function signUpForms() {
 
 window.addEventListener('load', () => {  
 
+    let current_window_locationUrl = window.location.href
+
 
 $('#sign-up-forms').on( 'submit', function(e) {
 
@@ -24,7 +26,7 @@ $('#sign-up-forms').on( 'submit', function(e) {
 
         $.ajax ( {
             type: "POST",
-            url: "http://localhost:4000/accounts/register",
+            url: "https://aqueous-atoll-96492.herokuapp.com/accounts/register",
             data: form.serialize() ,
             
             dataType: " json ",
@@ -33,21 +35,13 @@ $('#sign-up-forms').on( 'submit', function(e) {
             timeout: 200,
             xhrFields: {
                 withCredentials: true
-            },
-            beforeSend: function(xhr) { 
-        
-            },
-        
-            complete: function() {
-          
-            },
-            
+            },            
         
             success : function(data) {
     
                 swal('success', 'Success!', "Your Account has been created. Kindly login")  
                 
-                window.open("http://localhost:3000/")                       
+                window.open(current_window_locationUrl + "/home")                       
         
                 },
         
@@ -88,7 +82,7 @@ $('#sign-up-forms').on( 'submit', function(e) {
 
     <div class="sign-up-form-container">
         <form id="sign-up-forms" class="sign-up" 
-    action="http://localhost:4000/accounts/register" method="POST">
+    action="https://aqueous-atoll-96492.herokuapp.com/accounts/register" method="POST">
 
         <SignUpFiedset />
 
